@@ -4,7 +4,7 @@
   "description": "Art & Make by Maker Sphere - Art + Maker Classes for Kids & Teens",
   "main": "server/index.js",
   "scripts": {
-    "build": "npm rebuild better-sqlite3 --build-from-source",
+    "build": "rm -rf node_modules/better-sqlite3/build && npm install better-sqlite3 --build-from-source",
     "start": "node server/index.js",
     "dev": "node server/index.js"
   },
