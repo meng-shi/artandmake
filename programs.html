@@ -130,7 +130,7 @@
       <p id="modal-program-name"></p>
       <div class="error-message" id="interest-error"></div>
       <div class="success-msg" id="interest-success"></div>
-      <form id="interest-form">
+      <form id="interest-form" action="https://formspree.io/f/meajbrog" method="POST">
         <input type="hidden" id="interest-program" name="program">
         <div class="form-group">
           <label for="interest-name">Your Name *</label>
@@ -184,21 +184,34 @@
       document.getElementById('interest-modal').style.display = 'none';
     }
 
-    document.getElementById('interest-form').addEventListener('submit', function(e) {
+    document.getElementById('interest-form').addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = document.getElementById('interest-name').value;
-      const email = document.getElementById('interest-email').value;
-      const phone = document.getElementById('interest-phone').value;
-      const program = document.getElementById('interest-program').value;
-      const message = document.getElementById('interest-message').value;
+      const form = this;
+      const errorEl = document.getElementById('interest-error');
+      const successEl = document.getElementById('interest-success');
 
-      const subject = encodeURIComponent(`Interest in ${program} — ${name}`);
-      const body = encodeURIComponent(`Program: ${program}\nName: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message || 'No additional message'}`);
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
 
-      window.location.href = `mailto:artandmakestudio@gmail.com?subject=${subject}&body=${body}`;
-
-      document.getElementById('interest-form').reset();
-      document.getElementById('interest-program').value = program;
+        if (response.ok) {
+          successEl.style.display = 'block';
+          successEl.textContent = 'Interest registered! We\'ll contact you soon.';
+          const program = document.getElementById('interest-program').value;
+          form.reset();
+          document.getElementById('interest-program').value = program;
+          setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Failed to submit. Please try again.';
+        setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
+      }
     });
 
     document.getElementById('interest-modal').addEventListener('click', function(e) {

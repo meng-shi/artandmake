@@ -88,19 +88,35 @@ function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = form.querySelector('#name').value;
-    const email = form.querySelector('#email').value;
-    const phone = form.querySelector('#phone').value;
-    const message = form.querySelector('#message').value;
+    const errorEl = form.querySelector('.error-message');
+    const successEl = form.querySelector('.success-msg');
 
-    const subject = encodeURIComponent(`Contact from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message}`);
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
 
-    window.location.href = `mailto:artandmakestudio@gmail.com?subject=${subject}&body=${body}`;
-
-    form.reset();
+      if (response.ok) {
+        if (successEl) {
+          successEl.style.display = 'block';
+          successEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+        }
+        form.reset();
+        setTimeout(() => { if (successEl) successEl.style.display = 'none'; }, 5000);
+      } else {
+        throw new Error('Failed');
+      }
+    } catch (error) {
+      if (errorEl) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Failed to send message. Please try again.';
+        setTimeout(() => { if (errorEl) errorEl.style.display = 'none'; }, 5000);
+      }
+    }
   });
 }
