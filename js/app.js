@@ -94,6 +94,12 @@ function initContactForm() {
     const errorEl = form.querySelector('.error-message');
     const successEl = form.querySelector('.success-msg');
 
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+
     try {
       const response = await fetch(form.action, {
         method: 'POST',
@@ -102,20 +108,23 @@ function initContactForm() {
       });
 
       if (response.ok) {
+        form.style.display = 'none';
         if (successEl) {
           successEl.style.display = 'block';
-          successEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';
+          successEl.innerHTML = '<strong>Thank you!</strong> Your message has been sent. We\'ll get back to you soon.';
         }
-        form.reset();
-        setTimeout(() => { if (successEl) successEl.style.display = 'none'; }, 5000);
       } else {
         throw new Error('Failed');
       }
     } catch (error) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }
       if (errorEl) {
         errorEl.style.display = 'block';
         errorEl.textContent = 'Failed to send message. Please try again.';
-        setTimeout(() => { if (errorEl) errorEl.style.display = 'none'; }, 5000);
+        setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
       }
     }
   });

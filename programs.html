@@ -190,6 +190,12 @@
       const errorEl = document.getElementById('interest-error');
       const successEl = document.getElementById('interest-success');
 
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+
       try {
         const response = await fetch(form.action, {
           method: 'POST',
@@ -198,16 +204,17 @@
         });
 
         if (response.ok) {
+          form.style.display = 'none';
           successEl.style.display = 'block';
-          successEl.textContent = 'Interest registered! We\'ll contact you soon.';
-          const program = document.getElementById('interest-program').value;
-          form.reset();
-          document.getElementById('interest-program').value = program;
-          setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+          successEl.innerHTML = '<strong>Thank you!</strong> Your interest has been registered. We\'ll contact you soon.';
         } else {
           throw new Error('Failed');
         }
       } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
         errorEl.style.display = 'block';
         errorEl.textContent = 'Failed to submit. Please try again.';
         setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
