@@ -3,32 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programs - BrushBuild</title>
+  <title>Programs - Art&Make</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.ico">
 </head>
 <body>
   <header>
     <div class="container">
       <div class="header-inner">
         <a href="index.html" class="logo">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="20" r="18" fill="#e94560"/>
-            <path d="M12 28L20 12L28 28H12Z" fill="white"/>
-            <path d="M15 24L20 18L25 24H15Z" fill="#e94560"/>
-          </svg>
-          <span class="logo-font">BrushBuild</span>
+          <img src="images/favicon.ico" alt="Art&Make logo" width="40" height="40">
+          <span class="logo-font">Art and Make</span>
         </a>
         <nav>
           <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="programs.html">Programs</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="teachers.html">Teachers</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
           </ul>
         </nav>
-        <a href="register.html" class="btn btn-primary">Book Free Trial</a>
         <div class="mobile-toggle">
           <span></span>
           <span></span>
@@ -38,19 +31,6 @@
     </div>
   </header>
 
-  <div class="mobile-overlay"></div>
-  <div class="mobile-menu">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="programs.html">Programs</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="teachers.html">Teachers</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="register.html" class="btn btn-primary" style="margin-top: 20px;">Book Free Trial</a></li>
-    </ul>
-  </div>
-
   <section class="page-hero">
     <div class="container">
       <h1>Our Programs</h1>
@@ -58,101 +38,344 @@
     </div>
   </section>
 
-  <section class="filter-section">
+  <section class="programs-list-section">
     <div class="container">
-      <div class="filter-group">
-        <label>Filter by:</label>
-        <select id="program-filter">
-          <option value="">All Programs</option>
-          <option value="1">Fine Art - Kids</option>
-          <option value="2">Fine Art - Teens</option>
-          <option value="3">Digital Art</option>
-          <option value="4">Maker Lab</option>
-        </select>
-        <select id="level-filter">
-          <option value="">All Levels</option>
-          <option value="Beginner">Beginner</option>
-          <option value="Intermediate">Intermediate</option>
-          <option value="Advanced">Advanced</option>
-          <option value="All Levels">All Levels</option>
-        </select>
-        <select id="age-filter">
-          <option value="">All Ages</option>
-          <option value="4">Ages 4-6</option>
-          <option value="7">Ages 7-9</option>
-          <option value="10">Ages 10-14</option>
-          <option value="15">Ages 15-18</option>
-        </select>
+
+      <div class="program-row" id="fine-art">
+        <div class="program-row-image">
+          <img src="images/program-fine-art.png" alt="Fine Art" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Add Fine Art photo<br><small>images/program-fine-art.png</small></div>';">
+        </div>
+        <div class="program-row-content">
+          <span class="program-tag">Ages 4-12</span>
+          <h2>Fine Art</h2>
+          <p class="program-price-badge">$35/session</p>
+          <p>Explore drawing, painting, color, and creative expression through fun, meaningful projects. Each class connects art with
+          the world around us—from animals and nature to science, culture, and everyday life.</p>
+          <ul class="program-features">
+            <li>Small class sizes for personalized attention</li>
+            <li>Materials included — no extra costs</li>
+            <li>Build strong drawing and painting skills</li>
+            <li>Discover interesting topics through art</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openInterestModal('Fine Art')">Register Interest</button>
+        </div>
       </div>
+
+      <div class="program-row reverse" id="art-tech">
+        <div class="program-row-image">
+          <img src="images/program-art-tech.png" alt="Art and Tech" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Add Art & Tech photo<br><small>images/program-art-tech.png</small></div>';">
+        </div>
+        <div class="program-row-content">
+          <span class="program-tag">Ages 8-18</span>
+          <h2>Art and Tech</h2>
+          <p class="program-price-badge">$35/session</p>
+          <p>Turn creative ideas into digital and hands-on creations. Students explore digital art, coding, 3D modeling, 3D printing,
+          animation, and more—learning how technology can become a tool for creativity.</p>
+          <ul class="program-features">
+            <li>Build strong drawing and painting skills</li>
+            <li>Create art and animations</li>
+            <li>Explore coding and creative technology</li>
+            <li>Perfect bridge between art and STEM</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openInterestModal('Art and Tech')">Register Interest</button>
+        </div>
+      </div>
+
+      <div class="program-row" id="workshop">
+        <div class="program-row-image">
+          <img src="images/program-workshop.png" alt="Workshop" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Add Workshop photo<br><small>images/program-workshop.png</small></div>';">
+        </div>
+        <div class="program-row-content">
+          <span class="program-tag">All Ages</span>
+          <h2>One-time Workshop</h2>
+          <p class="program-price-badge">Contact for Price</p>
+          <p>Fun, themed art experiences designed around a different project or idea each time. Perfect for trying something new,
+          weekend activities, birthday parties, and group events.</p>
+          <ul class="program-features">
+            <li>No long-term commitment</li>
+            <li>Seasonal and creative themes</li>
+            <li>Great for parties and group activities</li>
+            <li>All materials provided</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openInterestModal('One-time Workshop')">Register Interest</button>
+        </div>
+      </div>
+
+      <div class="program-row reverse" id="portfolio">
+        <div class="program-row-image">
+          <img src="images/program-portfolio.png" alt="Portfolio" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Add Portfolio photo<br><small>images/program-portfolio.png</small></div>';">
+        </div>
+        <div class="program-row-content">
+          <span class="program-tag">Ages 12-18</span>
+          <h2>Portfolio</h2>
+          <p class="program-price-badge">Contact for Price</p>
+          <p>Personalized guidance for students building a strong portfolio for college or graduate school applications, especialy for majors like Human Computer Interaction.</p>
+          <ul class="program-features">
+            <li>Personalized portfolio development</li>
+            <li>Build a polished, cohesive portfolio</li>
+            <li>College application support</li>
+            <li>Previous students got admissions from CMU, Umich, NYU and more</li>
+          </ul>
+          <button class="btn btn-primary" onclick="openInterestModal('Portfolio')">Register Interest</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <section class="classes-section">
-    <div class="container">
-      <div class="classes-grid">
-      </div>
+  <div id="interest-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeInterestModal()">&times;</span>
+      <h3>Register Interest</h3>
+      <p id="modal-program-name"></p>
+      <div class="error-message" id="interest-error"></div>
+      <div class="success-msg" id="interest-success"></div>
+      <form id="interest-form">
+        <input type="hidden" id="interest-program" name="program">
+        <div class="form-group">
+          <label for="interest-name">Your Name *</label>
+          <input type="text" id="interest-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="interest-email">Email Address *</label>
+          <input type="email" id="interest-email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="interest-phone">Phone Number</label>
+          <input type="tel" id="interest-phone" name="phone">
+        </div>
+        <div class="form-group">
+          <label for="interest-message">Message</label>
+          <textarea id="interest-message" name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
-  </section>
+  </div>
 
   <section class="cta-section">
     <div class="container">
-      <h2>Can't Find What You're Looking For?</h2>
-      <p>Contact us to discuss custom class options or schedule a consultation.</p>
-      <a href="contact.html" class="btn">Contact Us</a>
+      <h2>Ready to Get Started?</h2>
+      <p>Contact us to learn more about our programs or schedule a visit.</p>
+      <a href="index.html#contact" class="btn">Contact Us</a>
     </div>
   </section>
 
   <footer>
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a href="index.html" class="logo">
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="18" fill="#e94560"/>
-              <path d="M12 28L20 12L28 28H12Z" fill="white"/>
-              <path d="M15 24L20 18L25 24H15Z" fill="#e94560"/>
-            </svg>
-            <span class="logo-font">BrushBuild</span>
-          </a>
-          <p>Inspiring the next generation of artists and makers through innovative art education and hands-on creative experiences.</p>
-          <div class="footer-social">
-            <a href="#">📘</a>
-            <a href="#">📸</a>
-            <a href="#">🐦</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Programs</h4>
-          <ul>
-            <li><a href="programs.html">Fine Art - Kids</a></li>
-            <li><a href="programs.html">Fine Art - Teens</a></li>
-            <li><a href="programs.html">Digital Art</a></li>
-            <li><a href="programs.html">Maker Lab</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="teachers.html">Our Team</a></li>
-            <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col footer-contact">
-          <h4>Contact Us</h4>
-          <p>📍 123 Creative Lane, Art City, CA 94000</p>
-          <p>📞 (408) 818-8818</p>
-          <p>✉️ hello@brushbuild.com</p>
-          <p>🕐 Tue-Fri: 3:30pm - 7pm<br>Sat-Sun: 9am - 6:30pm</p>
-        </div>
-      </div>
       <div class="footer-bottom">
-        <p>© 2026 BrushBuild. All rights reserved.</p>
+        <p>&copy; 2026 Art&amp;Make by Maker Sphere. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="js/app.js"></script>
+  <script>
+    function openInterestModal(program) {
+      document.getElementById('interest-program').value = program;
+      document.getElementById('modal-program-name').textContent = 'Program: ' + program;
+      document.getElementById('interest-modal').style.display = 'flex';
+      document.getElementById('interest-error').style.display = 'none';
+      document.getElementById('interest-success').style.display = 'none';
+      document.getElementById('interest-form').reset();
+      document.getElementById('interest-program').value = program;
+    }
+
+    function closeInterestModal() {
+      document.getElementById('interest-modal').style.display = 'none';
+    }
+
+    document.getElementById('interest-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const errorEl = document.getElementById('interest-error');
+      const successEl = document.getElementById('interest-success');
+
+      const data = {
+        name: document.getElementById('interest-name').value,
+        email: document.getElementById('interest-email').value,
+        phone: document.getElementById('interest-phone').value,
+        program: document.getElementById('interest-program').value,
+        message: document.getElementById('interest-message').value
+      };
+
+      try {
+        const response = await fetch('/api/interest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          successEl.style.display = 'block';
+          successEl.textContent = 'Interest registered! We\'ll contact you soon.';
+          document.getElementById('interest-form').reset();
+          document.getElementById('interest-program').value = data.program;
+          setTimeout(() => { successEl.style.display = 'none'; }, 5000);
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Failed to submit. Please try again.';
+        setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
+      }
+    });
+
+    document.getElementById('interest-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeInterestModal();
+    });
+  </script>
+
+  <style>
+    .programs-list-section {
+      padding: 60px 0 100px;
+    }
+
+    .program-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .program-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .program-row.reverse {
+      direction: rtl;
+    }
+
+    .program-row.reverse > * {
+      direction: ltr;
+    }
+
+    .program-row-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-medium);
+      aspect-ratio: 4/3;
+    }
+
+    .program-row-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .program-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .program-row-content h2 {
+      font-size: 36px;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .program-price-badge {
+      display: inline-block;
+      background: var(--highlight);
+      color: var(--primary);
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .program-row-content > p:not(.program-price-badge) {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .program-features {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .program-features li {
+      padding: 6px 0 6px 24px;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .program-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    .modal-content {
+      background: var(--white);
+      padding: 40px;
+      border-radius: var(--radius-md);
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: var(--shadow-heavy);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    #modal-program-name {
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .program-row,
+      .program-row.reverse {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        direction: ltr;
+      }
+
+      .program-row-content h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </body>
 </html>
