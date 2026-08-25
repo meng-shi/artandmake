@@ -91,14 +91,16 @@ function initContactForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const errorEl = form.querySelector('.error-message');
-    const successEl = form.querySelector('.success-msg');
+    const name = form.querySelector('#name').value;
+    const email = form.querySelector('#email').value;
+    const phone = form.querySelector('#phone').value;
+    const message = form.querySelector('#message').value;
 
-    if (successEl) {
-      successEl.style.display = 'block';
-      successEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-    }
+    const subject = encodeURIComponent(`Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'Not provided'}\n\nMessage:\n${message}`);
+
+    window.location.href = `mailto:artandmakestudio@gmail.com?subject=${subject}&body=${body}`;
+
     form.reset();
-    setTimeout(() => { if (successEl) successEl.style.display = 'none'; }, 5000);
   });
 }
