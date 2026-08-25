@@ -1,5 +1,3 @@
-const API_BASE = '';
-
 document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initMobileMenu();
@@ -58,82 +56,49 @@ function initScrollEffects() {
   });
 }
 
-async function loadPrograms() {
+function loadPrograms() {
   const grid = document.querySelector('.programs-grid');
   if (!grid) return;
 
-  try {
-    const response = await fetch(`${API_BASE}/api/programs`);
-    const programs = await response.json();
+  const programs = [
+    { name: 'Fine Art', description: 'Explore drawing, painting, color, and creative expression through fun, meaningful projects.', icon: '🎨', image: 'images/program-fine-art.png', link: 'programs.html#fine-art', price: '$35/session' },
+    { name: 'Art and Tech', description: 'Digital art, animation, and 3D design classes combining creativity with technology.', icon: '💻', image: 'images/program-art-tech.png', link: 'programs.html#art-tech', price: '$35/session' },
+    { name: 'One-time Workshop', description: 'Themed art workshops — perfect for trying something new or a fun weekend activity.', icon: '🔧', image: 'images/program-workshop.png', link: 'programs.html#workshop', price: 'Contact for Price' },
+    { name: 'Portfolio', description: 'Advanced portfolio development for students preparing for art school or college applications.', icon: '🖌️', image: 'images/program-portfolio.png', link: 'programs.html#portfolio', price: 'Contact for Price' }
+  ];
 
-    const programData = [
-      { icon: '🎨', image: 'images/program-fine-art.png', link: 'programs.html#fine-art', price: '$35/session' },
-      { icon: '💻', image: 'images/program-art-tech.png', link: 'programs.html#art-tech', price: '$35/session' },
-      { icon: '🔧', image: 'images/program-workshop.png', link: 'programs.html#workshop', price: 'Contact for Price' },
-      { icon: '🖌️', image: 'images/program-portfolio.png', link: 'programs.html#portfolio', price: 'Contact for Price' }
-    ];
-
-    grid.innerHTML = programs.map((program, i) => `
-      <a href="${programData[i]?.link || '#'}" class="program-card">
-        <div class="program-card-image">
-          <img src="${programData[i]?.image || ''}" alt="${program.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>📷 Add ${program.name} photo<br><small>${programData[i]?.image}</small></div>';">
+  grid.innerHTML = programs.map((program) => `
+    <a href="${program.link}" class="program-card">
+      <div class="program-card-image">
+        <img src="${program.image}" alt="${program.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'image-placeholder\\'>📷 Add ${program.name} photo<br><small>${program.image}</small></div>';">
+      </div>
+      <div class="program-card-content">
+        <h3>${program.name}</h3>
+        <p>${program.description}</p>
+        <div class="program-card-meta">
+          <span class="program-price">${program.price}</span>
+          <span class="program-link">Learn More →</span>
         </div>
-        <div class="program-card-content">
-          <h3>${program.name}</h3>
-          <p>${program.description || 'Explore our creative programs'}</p>
-          <div class="program-card-meta">
-            <span class="program-price">${programData[i]?.price || ''}</span>
-            <span class="program-link">Learn More →</span>
-          </div>
-        </div>
-      </a>
-    `).join('');
-  } catch (error) {
-    console.error('Error loading programs:', error);
-    grid.innerHTML = '<p class="loading">Failed to load programs. Please try again.</p>';
-  }
+      </div>
+    </a>
+  `).join('');
 }
 
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const errorEl = form.querySelector('.error-message');
     const successEl = form.querySelector('.success-msg');
 
-    const data = {
-      name: form.querySelector('#name').value,
-      email: form.querySelector('#email').value,
-      phone: form.querySelector('#phone').value,
-      message: form.querySelector('#message').value
-    };
-
-    try {
-      const response = await fetch(`${API_BASE}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        if (successEl) {
-          successEl.style.display = 'block';
-          successEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';
-        }
-        form.reset();
-        setTimeout(() => { if (successEl) successEl.style.display = 'none'; }, 5000);
-      } else {
-        throw new Error('Failed to send');
-      }
-    } catch (error) {
-      if (errorEl) {
-        errorEl.style.display = 'block';
-        errorEl.textContent = 'Failed to send message. Please try again.';
-        setTimeout(() => { if (errorEl) errorEl.style.display = 'none'; }, 5000);
-      }
+    if (successEl) {
+      successEl.style.display = 'block';
+      successEl.textContent = 'Message sent successfully! We\'ll get back to you soon.';
     }
+    form.reset();
+    setTimeout(() => { if (successEl) successEl.style.display = 'none'; }, 5000);
   });
 }

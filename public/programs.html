@@ -184,40 +184,16 @@
       document.getElementById('interest-modal').style.display = 'none';
     }
 
-    document.getElementById('interest-form').addEventListener('submit', async function(e) {
+    document.getElementById('interest-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const errorEl = document.getElementById('interest-error');
       const successEl = document.getElementById('interest-success');
+      const program = document.getElementById('interest-program').value;
 
-      const data = {
-        name: document.getElementById('interest-name').value,
-        email: document.getElementById('interest-email').value,
-        phone: document.getElementById('interest-phone').value,
-        program: document.getElementById('interest-program').value,
-        message: document.getElementById('interest-message').value
-      };
-
-      try {
-        const response = await fetch('/api/interest', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          successEl.style.display = 'block';
-          successEl.textContent = 'Interest registered! We\'ll contact you soon.';
-          document.getElementById('interest-form').reset();
-          document.getElementById('interest-program').value = data.program;
-          setTimeout(() => { successEl.style.display = 'none'; }, 5000);
-        } else {
-          throw new Error('Failed');
-        }
-      } catch (err) {
-        errorEl.style.display = 'block';
-        errorEl.textContent = 'Failed to submit. Please try again.';
-        setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
-      }
+      successEl.style.display = 'block';
+      successEl.textContent = 'Interest registered! We\'ll contact you soon.';
+      document.getElementById('interest-form').reset();
+      document.getElementById('interest-program').value = program;
+      setTimeout(() => { successEl.style.display = 'none'; }, 5000);
     });
 
     document.getElementById('interest-modal').addEventListener('click', function(e) {
